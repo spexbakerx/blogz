@@ -3,16 +3,14 @@
 {% block content %}
 <h1>Add a Blog Entry</h1>
 
-<form method='post'>
-    <label>
-        New blog post title:
+<form method='post' action="/blog">
+    <label> <p> New blog post title: </p>
         <input type="text" name='title' />
     </label>
-    <label>
-        Text goes here!
+    <label><p> Text goes here!</p>
         <input type="textarea" name='entry' />
     </label>
-    <input type="submit" value='Add Entry' />
+    <p><input type="submit" value='Add Entry' /></p>
 </form>
 
 {% endblock %}
