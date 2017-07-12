@@ -23,7 +23,7 @@ class Blog(db.Model):
 @app.route('/blog', methods=['POST', 'GET'])
 def blog():
     posts = Blog.query.all()
-    return render_template('base.html', posts=posts)
+    return render_template('/blog.html', posts=posts)
 
 
 @app.route('/newpost', methods=['POST', 'GET'])

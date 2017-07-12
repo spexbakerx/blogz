@@ -4,21 +4,18 @@
 
     <h1>Build A Blog</h1>
 
-    <hr />
 
-    {% if posts|length == 0 %}
-    <p>No entries yet!</p>
-    {% else %}
 
-    <b> test </b>
-        <ul>
-            {% for post in posts %}
-            <li>{{post.title}}
-            </li>
-            {{post.body}}
-            {% endfor %}
-        </ul>
+     {% if posts|length == 0 %}
+     <p>No entries yet!</p>
+     {% else %}
 
-    {% endif %}
+             {% for post in posts %}
+             <h2>{{post.title}}</h2>
+             <p>{{post.body}}</p>
+             <hr />
+             {% endfor %}
+
+     {% endif %}
 
 {% endblock %}
