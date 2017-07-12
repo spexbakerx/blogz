@@ -3,12 +3,12 @@
 {% block content %}
 <h1>Add a Blog Entry</h1>
 
-<form method='post' action="/blog">
+<form method='post'>
     <label> <p> New blog post title: </p>
-        <input type="text" name='title' />
+        <input type="text" name='title' value="{{ title }}"/>
     </label>
     <label><p> Text goes here!</p>
-        <input type="textarea" name='entry' />
+        <input type="textarea" name='body' value="{{ body }}"/>
     </label>
     <p><input type="submit" value='Add Entry' /></p>
 </form>

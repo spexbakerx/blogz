@@ -1,21 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Add a Blog Entry</h1>
-
-    <form method='post'>
-        <label>
-            New blog post title:
-            <input type="text" name='title' />
-        </label>
-        <label>
-            Text goes here!
-            <input type="textarea" name='entry' />
-        </label>
-        <input type="submit" value='Add Entry' />
-    </form>
-
-    <hr />
 
     <h1>Build A Blog</h1>
 
@@ -25,10 +10,12 @@
     <p>No entries yet!</p>
     {% else %}
 
+    <b> test </b>
         <ul>
             {% for post in posts %}
-            <li>{{post.name}}
+            <li>{{post.title}}
             </li>
+            {{post.body}}
             {% endfor %}
         </ul>
 

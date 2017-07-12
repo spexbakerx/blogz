@@ -22,7 +22,8 @@ class Blog(db.Model):
 
 @app.route('/blog', methods=['POST', 'GET'])
 def blog():
-    return render_template('base.html')
+    posts = Blog.query.all()
+    return render_template('base.html', posts=posts)
 
 
 @app.route('/newpost', methods=['POST', 'GET'])
@@ -30,8 +31,12 @@ def newpost():
     if request.method == 'POST':
         title = request.form['title']
         body = request.form['body']
-
-    return render_template('newpost.html')
+        new_post = Blog(title, body)
+        db.session.add(new_post)
+        db.session.commit()
+        return redirect('/blog')
+    else:
+        return render_template('newpost.html')
 
 
 
