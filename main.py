@@ -9,6 +9,10 @@ db = SQLAlchemy(app)
 app.secret_key = 'y337kGcys&zP3B'
 
 
+def blank(text):
+    if text == '':
+        return True
+
 class Blog(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
@@ -21,9 +25,17 @@ class Blog(db.Model):
 
 
 @app.route('/blog', methods=['POST', 'GET'])
-def blog():
+def blog_listings():
+    '''Display all blogs in the database, or just a specific post if an ID is passed in the GET'''
+
     posts = Blog.query.all()
-    return render_template('/blog.html', posts=posts)
+
+    if request.args.get('id'):
+        post_id = request.args.get('id')
+        post = Blog.query.filter_by(id=post_id).first()
+        return render_template('blogpage.html', post=post)
+
+    return render_template('blog.html', posts=posts)
 
 
 @app.route('/newpost', methods=['POST', 'GET'])
@@ -31,10 +43,14 @@ def newpost():
     if request.method == 'POST':
         title = request.form['title']
         body = request.form['body']
-        new_post = Blog(title, body)
-        db.session.add(new_post)
-        db.session.commit()
-        return redirect('/blog')
+        if not blank(body) and not blank(title):
+            new_post = Blog(title, body)
+            db.session.add(new_post)
+            db.session.commit()
+            return redirect('/blog')
+        else:
+            flash('Looks like you forgot a title or body for your post!', 'error')
+            return render_template("newpost.html")
     else:
         return render_template('newpost.html')
 
